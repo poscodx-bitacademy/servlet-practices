@@ -1,6 +1,6 @@
-<%@ page import="com.douzone.guestbook.vo.GuestbookVo"%>
+<%@ page import="com.poscodx.guestbook.vo.GuestbookVo"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.douzone.guestbook.dao.GuestbookDao"%>
+<%@ page import="com.poscodx.guestbook.dao.GuestbookDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	List<GuestbookVo> list = new GuestbookDao().findAll();
@@ -18,7 +18,7 @@
 			<td>비밀번호</td><td><input type="password" name="password"></td>
 		</tr>
 		<tr>
-			<td colspan=4><textarea name="message" cols=60 rows=5></textarea></td>
+			<td colspan=4><textarea name="contents" cols=60 rows=5></textarea></td>
 		</tr>
 		<tr>
 			<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td colspan=4>
-					<%=vo.getMessage().replaceAll("\n", "<br>") %>
+					<%=vo.getContents().replaceAll("\n", "<br>") %>
 				</td>
 			</tr>
 		</table>

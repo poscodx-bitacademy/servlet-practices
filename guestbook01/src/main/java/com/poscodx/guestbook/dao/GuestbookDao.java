@@ -1,4 +1,4 @@
-package com.douzone.guestbook.dao;
+package com.poscodx.guestbook.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.douzone.guestbook.vo.GuestbookVo;
+import com.poscodx.guestbook.vo.GuestbookVo;
 
 public class GuestbookDao {
 	public Boolean deleteByNoAndPassword(Long no, String password) {
@@ -60,7 +60,7 @@ public class GuestbookDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getMessage());
+			pstmt.setString(3, vo.getContents());
 			
 			int count = pstmt.executeUpdate();
 			
@@ -97,7 +97,7 @@ public class GuestbookDao {
 			conn = getConnection();
 			
 			String sql =
-				"    select no, name, message, date_format(reg_date, '%Y/%m/%d %H:%i:%s')" + 
+				"    select no, name, contents, date_format(reg_date, '%Y/%m/%d %H:%i:%s')" + 
 				"      from guestbook" + 
 				"  order by reg_date desc";
 			pstmt = conn.prepareStatement(sql);
@@ -106,13 +106,13 @@ public class GuestbookDao {
 			while(rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
-				String message = rs.getString(3);
+				String contents = rs.getString(3);
 				String regDate = rs.getString(4);
 				
 				GuestbookVo vo = new GuestbookVo();
 				vo.setNo(no);
 				vo.setName(name);
-				vo.setMessage(message);
+				vo.setContents(contents);
 				vo.setRegDate(regDate);
 				
 				result.add(vo);
@@ -147,7 +147,7 @@ public class GuestbookDao {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			
-			String url = "jdbc:mariadb://192.168.10.125:3307/webdb?charset=utf8";
+			String url = "jdbc:mariadb://192.168.0.172:3307/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
