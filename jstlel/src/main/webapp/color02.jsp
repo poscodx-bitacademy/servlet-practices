@@ -9,10 +9,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h4>JSTL Test: forEach</h4>
-	<c:forEach items="${list }" var="vo" varStatus="status">
-		<h6>[${status.count}:${status.index}] ${vo.no } : ${vo.name }</h6>
-		
-	</c:forEach>
+	<c:choose>
+		<c:when test='${param.c == "red"}'>
+			<h1 style="color:red">Hello World</h1>
+		</c:when>
+		<c:when test='${param.c == "blue"}'>
+			<h1 style="color:blue">Hello World</h1>
+		</c:when>
+		<c:when test='${param.c == "green"}'>
+			<h1 style="color:green">Hello World</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Hello World</h1>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
