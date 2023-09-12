@@ -2,13 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String row = request.getParameter("r");
-	String col = request.getParameter("c");
-				
-	int nRow = Integer.parseInt(row);
-	int nCol = Integer.parseInt(col);		
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,22 +9,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="row" value="${param.r }" />
+	<c:set var="col" value="${param.c }" />
+	
+	<c:if test="${empty row }">
+		<c:set var="row" value="3" />
+	</c:if>
+	<c:if test="${empty col }">
+		<c:set var="col" value="3" />
+	</c:if>
+	
 	<table border="1" cellspacing="0" cellpadding="10">
-		<%
-			for(int i = 0; i < nRow; i++) {
-		%>
+		<c:forEach begin="0" end="${row - 1 }" step="1" var="i">
 			<tr>
-				<%
-					for(int j = 0; j < nCol; j++) {
-				%>
-					<td>Cell(<%=i %>, <%=j %>)</td>
-				<%
-					}
-				%>
+				<c:forEach begin="0" end="${col - 1 }" step="1" var="j">
+					<td>Cell(${i }, ${j })</td>
+				</c:forEach>
 			</tr>
-		<%
-			}
-		%>
+		</c:forEach>
 	</table>
 </body>
 </html>
